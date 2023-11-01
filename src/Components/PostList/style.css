@@ -1,0 +1,13 @@
+.post-list {
+    padding: 2vw;
+}
+
+.post-list_title {
+    display: flex;
+    justify-content: center;
+    font-size: 40px;
+}
+
+.post-list_author {
+    font-size: 25px;
+}
