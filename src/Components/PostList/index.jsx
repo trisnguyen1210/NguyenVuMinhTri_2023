@@ -5,16 +5,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchPosts } from "../../redux/actions/postActions";
 import { Tag } from "antd";
 import CommentPost from "./CommentPost";
-import CommentsLength from "./CommentsLength";
+// import CommentsLength from "./CommentsLength";
 import { fetchUsers } from "../../redux/actions/userAction";
+import { fetchComments } from "../../redux/actions/commentActions";
 
 function PostList(params) {
   const dispatch = useDispatch();
-  const posts = useSelector((state) => state.posts.posts);
-  const users = useSelector((state) => state.users.users);
+  const posts = useSelector((state) => state.posts.posts.result);
+  const users = useSelector((state) => state.users.users.result);
+  const comments = useSelector((state) => state.comments.comments.result);
   useEffect(() => {
     dispatch(fetchPosts());
     dispatch(fetchUsers());
+    dispatch(fetchComments());
   }, [dispatch]);
 
   return (
@@ -27,11 +30,13 @@ function PostList(params) {
             </div>
             <div className="post-list_author">
               <div>
-                <p>Author: {users[post.userId - 1].name}</p>
+                {/* Use BE_task */}
+                <p>Author: {users ? users[post?.owner]?.username : ""}</p>
                 <p>CreateAt: Sep 18,2022</p>
               </div>
               <div className="post-list_author_hashtag">
-                <Tag color="magenta">magenta</Tag>
+                {/* Use FE_Task */}
+                {/* <Tag color="magenta">magenta</Tag>
                 <Tag color="red">red</Tag>
                 <Tag color="volcano">volcano</Tag>
                 <Tag color="orange">orange</Tag>
@@ -41,14 +46,21 @@ function PostList(params) {
                 <Tag color="cyan">cyan</Tag>
                 <Tag color="blue">blue</Tag>
                 <Tag color="geekblue">geekblue</Tag>
-                <Tag color="purple">purple</Tag>
+                <Tag color="purple">purple</Tag> */}
+                {/* Use BE_task */}
+                {post?.tags.map((tag, index) => (
+                  <Tag color="blue" key={index}>
+                    {tag}
+                  </Tag>
+                ))}
               </div>
             </div>
             <div className="post-list_content">
-              <p>{post.body}</p>
+              <p>{post.content}</p>
             </div>
             <div className="post-list_comment">
-              <Collapse
+              {/* Use FE_Task */}
+              {/* <Collapse
                 items={[
                   {
                     label: (
@@ -56,6 +68,22 @@ function PostList(params) {
                         {`${
                           CommentsLength({ postId: post.id }).commentsLength
                         } replies`}
+                      </div>
+                    ),
+                    children: (
+                      <div>
+                        <CommentPost postId={post.id} />
+                      </div>
+                    ),
+                  },
+                ]}
+              /> */}
+              <Collapse
+                items={[
+                  {
+                    label: (
+                      <div>
+                        {comments?.filter((e) => e.post == post.id).length} replies
                       </div>
                     ),
                     children: (
