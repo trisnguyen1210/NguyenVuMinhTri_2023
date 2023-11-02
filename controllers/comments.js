@@ -12,7 +12,7 @@ export class CommentsController {
         try {
             console.log("Get all comment")
             const result = await CommentsModel.find()
-            return res.status(200).json({ message: "success", Info: result })
+            return res.status(200).json({ result })
         }
         catch (error) {
             return res.status(400).json(error)

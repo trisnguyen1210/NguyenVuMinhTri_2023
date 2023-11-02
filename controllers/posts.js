@@ -5,7 +5,7 @@ export class PostsController {
         try {
             console.log("GET all post")
             const result = await PostsModel.find()
-            return res.status(200).json({ message: "success", info: result })
+            return res.status(200).json({ result })
         } catch (error) {
             return res.status(404).json({ message: `404 not found` })
         }
