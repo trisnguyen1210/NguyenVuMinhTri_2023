@@ -1,7 +1,12 @@
+import avatarUser from "../../assets/user.png";
+import "./style.css";
 function AvatarUser(params) {
   return (
     <>
-      <p>AvatarUser</p>
+      <div className="header_avatar">
+        <img src={avatarUser}></img>
+        <p>TriNVM</p>
+      </div>
     </>
   );
 }

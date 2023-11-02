@@ -1,7 +1,11 @@
+import LogoImg from "../../assets/Logo.jpg";
+import "./style.css";
 function LogoHeader(params) {
   return (
     <>
-      <p>LogoHeader</p>
+      <div className="header_logo">
+        <img src={LogoImg}></img>
+      </div>
     </>
   );
 }
